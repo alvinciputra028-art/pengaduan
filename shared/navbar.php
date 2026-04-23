@@ -27,7 +27,7 @@ $page = $page ?? '';
             <a href="../penghuni/buat_pengaduan.php" class="<?= ($page == 'pengaduan') ? 'active' : '' ?>">
                 Adukan</a>
 
-            <a href="../penghuni/forum.php" class="<?= ($page == 'forum') ? 'active' : '' ?>">Daftar Pengaduan</a>
+            <a href="../penghuni/daftar_pengaduan.php" class="<?= ($page == 'daftar') ? 'active' : '' ?>">Daftar Pengaduan</a>
 
             <a href="../penghuni/riwayat.php" class="<?= ($page == 'riwayat') ? 'active' : '' ?>">Riwayat</a>
 
