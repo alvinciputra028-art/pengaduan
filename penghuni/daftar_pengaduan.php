@@ -38,7 +38,7 @@ $query = mysqli_stmt_get_result($stmt);
     </div>
 
     <div class="konten">
-        <h2 id="judul-h2">Forum Pengaduan (<?= $jenis_hunian ?>)
+        <h2 id="judul-h2">Daftar Pengaduan (<?= $jenis_hunian ?>)
         </h2>
 
         <?php if (mysqli_num_rows($query) > 0): ?>
