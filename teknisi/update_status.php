@@ -5,23 +5,21 @@ include '../config/koneksi.php';
 
 $id_teknisi = $_SESSION['id'];
 
-/* ======================
-   AMBIL PENGADUAN
-====================== */
+/* AMBIL PENGADUAN */
 if (isset($_GET['aksi']) && $_GET['aksi'] == 'ambil') {
-
     $id = $_GET['id'];
     $status = 'Diproses';
     $status_menunggu = 'Menunggu';
+    $dini = $_GET['dini'];
 
     $stmt = mysqli_prepare($koneksi, "
         UPDATE pengaduan 
-        SET status = ?, id_teknisi = ?
+        SET status = ?, id_teknisi = ?, penanganan_dini = ?
         WHERE id_pengaduan = ?
         AND status = ?
     ");
 
-    mysqli_stmt_bind_param($stmt, "siis", $status, $id_teknisi, $id, $status_menunggu);
+    mysqli_stmt_bind_param($stmt, "sisis", $status, $id_teknisi, $dini, $id, $status_menunggu);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
@@ -29,11 +27,8 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'ambil') {
     exit;
 }
 
-/* ======================
-   SELESAIKAN + UPLOAD
-====================== */
+/* SELESAIKAN + UPLOAD */
 if (isset($_POST['aksi']) && $_POST['aksi'] == 'selesai') {
-
     $id = $_POST['id'];
     $komentar = $_POST['komentar'];
 

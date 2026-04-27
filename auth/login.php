@@ -76,7 +76,7 @@ if (isset($_GET['error'])) {
             <form method="POST" action="proses_login.php">
                 <label>Email Student / Username</label>
                 <div class="note">
-                    Gunakan email student (penghuni) atau username (teknisi)
+                    Gunakan email student (penghuni) atau username (teknisi & manajer)
                 </div>
                 <input type="text" name="email_username" placeholder="Masukkan email/username" required>
 

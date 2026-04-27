@@ -76,7 +76,7 @@ $query = mysqli_stmt_get_result($stmt);
                 </div>
             <?php endwhile; ?>
         <?php else: ?>
-            <p>Belum ada pengaduan dari penghuni lain di gedung ini.</p>
+            <p>Anda belum pernah melakukan pengaduan.</p>
         <?php endif; ?>
     </div>
 

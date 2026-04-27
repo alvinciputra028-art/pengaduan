@@ -10,6 +10,9 @@ if (isset($_SESSION['role'])) {
     } elseif ($_SESSION['role'] === 'teknisi') {
         header("Location: teknisi/beranda.php");
         exit;
+    } elseif ($_SESSION["role"] === "manajer") {
+        header("Location: manajer/beranda.php");
+        exit;
     }
 }
 

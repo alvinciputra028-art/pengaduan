@@ -6,9 +6,7 @@ include '../config/koneksi.php';
 $email_username = $_POST['email_username'];
 $password = $_POST['password'];
 
-// ======================
 // 1. CEK KE TABEL PENGHUNI
-// ======================
 $stmt = mysqli_prepare($koneksi, "SELECT * FROM penghuni WHERE email_student = ?");
 mysqli_stmt_bind_param($stmt, "s", $email_username);
 mysqli_stmt_execute($stmt);
@@ -33,9 +31,7 @@ if ($data_penghuni) {
 
 mysqli_stmt_close($stmt);
 
-// ======================
 // 2. CEK KE TABEL TEKNISI
-// ======================
 $stmt = mysqli_prepare($koneksi, "SELECT * FROM teknisi WHERE username = ?");
 mysqli_stmt_bind_param($stmt, "s", $email_username);
 mysqli_stmt_execute($stmt);
@@ -60,11 +56,9 @@ if ($data_teknisi) {
 
 mysqli_stmt_close($stmt);
 
-// ======================
 // 3. CEK KE TABEL MANAGER
-// ======================
 $stmt = mysqli_prepare($koneksi, "
-    SELECT * FROM manager WHERE username = ?
+    SELECT * FROM manajer WHERE username = ?
 ");
 mysqli_stmt_bind_param($stmt, "s", $email_username);
 mysqli_stmt_execute($stmt);
@@ -75,11 +69,11 @@ mysqli_stmt_close($stmt);
 if ($data_manager) {
     if (password_verify($password, $data_manager['password'])) {
 
-        $_SESSION['id'] = $data_manager['id_manager'];
-        $_SESSION['role'] = 'manager';
+        $_SESSION['id'] = $data_manager['id_manajer'];
+        $_SESSION['role'] = 'manajer';
         $_SESSION['nama'] = $data_manager['nama'];
 
-        header("Location: ../manager/beranda.php");
+        header("Location: ../manajer/beranda.php");
         exit;
     } else {
         header("Location: login.php?error=1");
@@ -87,9 +81,7 @@ if ($data_manager) {
     }
 }
 
-// ======================
-// 4. JIKA TIDAK DITEMUKAN
-// ======================
+// JIKA TIDAK DITEMUKAN
 header("Location: login.php?error=2");
 exit;
 ?>

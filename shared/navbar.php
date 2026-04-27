@@ -44,12 +44,12 @@ $page = $page ?? '';
 
             <a href="../teknisi/profil.php" class="<?= ($page == 'profil') ? 'active' : '' ?>">Profil</a>
 
-        <?php elseif ($role == 'manager'): ?>
-            <a href="../manager/beranda.php" class="<?= ($page == 'beranda') ? 'active' : '' ?>">Beranda</a>
+        <?php elseif ($role == 'manajer'): ?>
+            <a href="../manajer/beranda.php" class="<?= ($page == 'beranda') ? 'active' : '' ?>">Beranda</a>
 
-            <a href="../manager/laporan.php" class="<?= ($page == 'laporan') ? 'active' : '' ?>">Laporan</a>
+            <a href="../manajer/laporan.php" class="<?= ($page == 'laporan') ? 'active' : '' ?>">Laporan</a>
 
-            <a href="../manager/profil.php" class="<?= ($page == 'profil') ? 'active' : '' ?>">Profil</a>
+            <a href="../manajer/profil.php" class="<?= ($page == 'profil') ? 'active' : '' ?>">Profil</a>
 
         <?php endif; ?>
 
