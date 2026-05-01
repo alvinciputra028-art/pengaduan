@@ -1,0 +1,552 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ===== LOGIN ===== */
+.container {
+    background: white;
+    width: 800px;
+    border-radius: 15px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.left {
+    width: 40%;
+    background: #f9f9f9;
+    display: block;
+    align-items: center;
+    padding: 20px;
+}
+
+.left h3 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.logo-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-logo {
+    display: none;
+}
+
+.left img {
+    width: 200px;
+}
+
+.right {
+    width: 60%;
+    padding: 40px;
+}
+
+.right h3 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+input,
+button,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+input {
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #0EA2BD;
+    margin-bottom: 0px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+label {
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0c8ca3;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.note {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.banner {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* ===== NAVBAR DASAR ===== */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 5px 80px;
+    color: #0EA2BD;
+    height: 100px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-left img {
+    width: 100px;
+}
+
+.nav-left span {
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-menu a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-menu a.active {
+    font-weight: bold;
+    color: #0EA2BD;
+    border-bottom: 2px solid #0EA2BD;
+}
+
+.nav-right {
+    font-size: 18px;
+}
+
+.logout-mobile {
+    display: none;
+}
+
+.logout-desktop {
+    color: red;
+    text-decoration: none;
+}
+
+.logout-icon {
+    display: none;
+}
+
+.logout-text {
+    display: inline;
+}
+
+/* ===== HAMBURGER ===== */
+.menu-toggle {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #0EA2BD;
+    transition: 0.3s;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ===== BANNER ===== */
+.banner {
+    display: flex;
+    gap: 10px;
+    padding: 20px 80px;
+}
+
+.banner img {
+    width: 33%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* ===== KONTEN ===== */
+.konten {
+    background: white;
+    margin: 20px 320px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#sapa {
+    margin-bottom: 10px;
+}
+
+.konten h3 {
+    margin-top: 20px;
+}
+
+/* ===== CARD ===== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.card {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 5px solid #0EA2BD;
+}
+
+#judul-h2 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 60px;
+    color: #0EA2BD;
+}
+
+/* ===== FORUM & RIWAYAT ===== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+    display: block;
+    margin: auto;
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* ===== CARD ===== */
+.card-forum {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ===== HEADER ===== */
+.card-header {
+    margin-bottom: 10px;
+}
+
+.ticket {
+    font-weight: bold;
+    color: #0EA2BD;
+}
+
+.meta {
+    font-size: 14px;
+    color: #777;
+}
+
+/* ===== STATUS ===== */
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: white;
+}
+
+.menunggu {
+    background: orange;
+}
+
+.diproses {
+    background: #0EA2BD;
+}
+
+.selesai {
+    background: green;
+}
+
+/* ===== DESKRIPSI ===== */
+.deskripsi {
+    margin: 10px 0;
+}
+
+/* ===== GAMBAR ===== */
+.gambar {
+    margin-top: 10px;
+}
+
+.gambar a {
+    color: #0EA2BD;
+    text-decoration: none;
+}
+
+.gambar img {
+    width: 200px;
+    border-radius: 8px;
+}
+
+/* ===== PROFIL ===== */
+.info {
+    width: 100%;
+    padding: 0px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.password {
+    width: 150px;
+    background-color: orange;
+}
+
+.konten a {
+    color: #0EA2BD;
+    text-decoration: none;
+}
+
+/* ===== Chart Manajer ===== */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.chart-box-bar {
+    flex: 2;
+    min-width: 400px;
+}
+
+.chart-box-pie {
+    flex: 1;
+    max-width: 350px;
+    min-width: 250px;
+    margin: 0 auto;
+}
+
+/* ===== RESPONSIVE TABLET ===== */
+@media (max-width: 1300px) {
+    .navbar {
+        padding: 10px 30px;
+    }
+
+    .nav-left img {
+        width: 60px;
+    }
+
+    .nav-left span {
+        font-size: 20px;
+    }
+
+    .nav-menu {
+        gap: 15px;
+    }
+
+    .nav-menu a {
+        font-size: 16px;
+    }
+
+    .logout-text {
+        display: none;
+    }
+
+    .logout-icon {
+        margin-left: 20px;
+        display: inline;
+        font-size: 20px;
+    }
+
+    .banner {
+        padding: 20px 30px;
+    }
+
+    .konten {
+        margin: 20px 30px;
+    }
+
+    #panduan {
+        grid-template-columns: 1fr;
+    }
+
+    .konten {
+        padding: 20px 30px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .nav-left span {
+        font-size: 18px;
+    }
+}
+
+/* ===== RESPONSIVE MOBILE ===== */
+@media (max-width: 750px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left {
+        display: none;
+    }
+
+    .right {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .mobile-logo {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .mobile-logo img {
+        width: 80px;
+    }
+
+    .navbar {
+        padding: 10px 20px;
+    }
+
+    .nav-left img {
+        width: 80px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        width: 100%;
+        background: white;
+
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+        display: none;
+    }
+
+    .nav-menu a {
+        padding: 15px;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid #eee;
+    }
+
+    .nav-menu.show {
+        display: flex;
+    }
+
+    .nav-right {
+        display: none;
+        /* sembunyikan logout di kanan */
+    }
+
+    .logout-mobile {
+        display: block;
+        color: red !important;
+        font-weight: bold;
+    }
+
+    .banner {
+        flex-direction: column;
+    }
+
+    .banner img {
+        width: 100%;
+        height: 180px;
+    }
+
+    .konten {
+        margin: 15px;
+        padding: 20px;
+    }
+
+    #sapa {
+        font-size: 18px;
+    }
+
+    .forum-container {
+        padding: 15px;
+    }
+
+    .gambar img {
+        width: 100%;
+    }
+}
