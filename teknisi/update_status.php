@@ -6,11 +6,17 @@ include '../config/koneksi.php';
 $id_teknisi = $_SESSION['id'];
 
 /* AMBIL PENGADUAN */
-if (isset($_GET['aksi']) && $_GET['aksi'] == 'ambil') {
-    $id = $_GET['id'];
+if (isset($_POST['aksi']) && $_POST['aksi'] == 'ambil') {
+    $id = $_POST['id'];
     $status = 'Diproses';
     $status_menunggu = 'Menunggu';
-    $dini = $_GET['dini'];
+    $dini = $_POST['dini'];
+
+    if (empty($dini)) {
+        $_SESSION['error'] = "Penanganan dini tidak boleh kosong";
+        header("Location: ../shared/detail_pengaduan.php?id=$id&page=baru");
+        exit;
+    }
 
     $stmt = mysqli_prepare($koneksi, "
         UPDATE pengaduan 
@@ -27,24 +33,26 @@ if (isset($_GET['aksi']) && $_GET['aksi'] == 'ambil') {
     exit;
 }
 
-/* SELESAIKAN + UPLOAD */
+/* SELESAIKAN & UPLOAD */
 if (isset($_POST['aksi']) && $_POST['aksi'] == 'selesai') {
     $id = $_POST['id'];
     $komentar = $_POST['komentar'];
 
     // upload bukti
-    $allowed = ['jpg','jpeg','png'];
+    $allowed = ['jpg', 'jpeg', 'png'];
     $file = $_FILES['bukti_selesai'];
 
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
     if (!in_array($ext, $allowed)) {
-        echo "Format tidak valid!";
+        $_SESSION['error'] = "Format file harus JPG, JPEG, atau PNG";
+        header("Location: ../shared/detail_pengaduan.php?id=$id&page=diproses");
         exit;
     }
 
     if ($file['size'] > 2 * 1024 * 1024) {
-        echo "File terlalu besar!";
+        $_SESSION['error'] = "Ukuran file maksimal 2MB";
+        header("Location: ../shared/detail_pengaduan.php?id=$id&page=diproses");
         exit;
     }
 
@@ -52,7 +60,8 @@ if (isset($_POST['aksi']) && $_POST['aksi'] == 'selesai') {
     $path = '../uploads/bukti_penyelesaian/' . $new_name;
 
     if (!move_uploaded_file($file['tmp_name'], $path)) {
-        echo "Upload gagal!";
+        $_SESSION['error'] = "Upload bukti penyelesaian gagal";
+        header("Location: ../shared/detail_pengaduan.php?id=$id&page=diproses");
         exit;
     }
 

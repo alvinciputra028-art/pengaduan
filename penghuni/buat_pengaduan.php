@@ -7,7 +7,6 @@ include '../shared/navbar.php';
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Buat Pengaduan</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -17,8 +16,15 @@ include '../shared/navbar.php';
     <div class="konten">
         <h2 id="judul-h2">Buat Pengaduan Kendala</h2>
 
-        <form action="proses_pengaduan.php" method="POST" enctype="multipart/form-data">
+        <!-- ERROR MESSAGE -->
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="error">
+                <?= $_SESSION['error']; ?>
+            </div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
 
+        <form action="proses_pengaduan.php" method="POST" enctype="multipart/form-data">
             <label>Kategori:</label><br>
             <select name="kategori" required>
                 <option value="" disabled selected>-- Pilih Kategori --</option>
@@ -38,10 +44,7 @@ include '../shared/navbar.php';
             <input type="file" name="bukti_foto" accept="image/*" required><br><br>
 
             <button type="submit">Kirim Pengaduan</button>
-
         </form>
-
     </div>
 </body>
-
 </html>

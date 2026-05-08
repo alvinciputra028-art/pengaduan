@@ -1,20 +1,22 @@
 <?php
-$page = $_GET['page'];
+$page = $_GET['page'] ?? 'beranda';
 include '../auth/check_session.php';
 include '../config/koneksi.php';
 include '../shared/navbar.php';
 
-// validasi id
+$role = $_SESSION['role'];
+$user_id = $_SESSION['id'];
+
+// VALIDASI ID
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
-    echo "ID tidak valid";
+    $_SESSION['error'] = "ID pengaduan tidak valid!";
+    header("Location: ../$role/beranda.php");
     exit;
 }
 
 $id = $_GET['id'];
-$role = $_SESSION['role'];
-$user_id = $_SESSION['id'];
 
-// ambil data pengaduan
+// AMBIL DATA PENGADUAN
 $stmt = mysqli_prepare($koneksi, "
     SELECT p.*, ph.nama_penghuni, ph.kamar, ph.nomor_hp AS hp_penghuni, ph.jenis_hunian, t.nama_teknisi, t.nomor_hp AS hp_teknisi
     FROM pengaduan p
@@ -22,56 +24,62 @@ $stmt = mysqli_prepare($koneksi, "
     LEFT JOIN teknisi t ON p.id_teknisi = t.id_teknisi
     WHERE p.id_pengaduan = ?
 ");
+
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
+
 $result = mysqli_stmt_get_result($stmt);
 
+// DATA TIDAK DITEMUKAN
 if (mysqli_num_rows($result) == 0) {
-    echo "Data tidak ditemukan";
+    $_SESSION['error'] = "Data pengaduan tidak ditemukan!";
+    header("Location: ../$role/$page.php");
     exit;
 }
 
 $data = mysqli_fetch_assoc($result);
 
-// VALIDASI AKSES
+// VALIDASI AKSES PENGHUNI
 if ($role == 'penghuni') {
-    // ambil gedung user login
     $user_gedung = $_SESSION['jenis_hunian'];
-
-    // hanya boleh lihat milik sendiri atau dalam gedung yang sama (daftar pengaduan)
-    if ($data['id_penghuni'] != $user_id && $data['jenis_hunian'] != $user_gedung) {
-        echo "Akses ditolak";
+    // hanya boleh lihat milik sendiri atau forum gedung yang sama
+    if (
+        $data['id_penghuni'] != $user_id &&
+        $data['jenis_hunian'] != $user_gedung
+    ) {
+        $_SESSION['error'] = "Akses ditolak!";
+        header("Location: ../penghuni/forum.php");
         exit;
     }
 }
 
+// VALIDASI AKSES TEKNISI
 if ($role == 'teknisi') {
     // hanya boleh lihat jika sesuai gedung atau dia yang menangani
     if (
         $data['jenis_hunian'] != $_SESSION['departemen_gedung'] &&
         $data['id_teknisi'] != $user_id
     ) {
-        echo "Akses ditolak";
+        $_SESSION['error'] = "Akses ditolak!";
+        header("Location: ../teknisi/beranda.php");
         exit;
     }
 }
 
-// manager bebas akses
-
 // STATUS CLASS
 $status_class = '';
-if ($data['status'] == 'Menunggu')
-    $status_class = 'menunggu';
-elseif ($data['status'] == 'Diproses')
-    $status_class = 'diproses';
-else
-    $status_class = 'selesai';
 
+if ($data['status'] == 'Menunggu') {
+    $status_class = 'menunggu';
+} elseif ($data['status'] == 'Diproses') {
+    $status_class = 'diproses';
+} else {
+    $status_class = 'selesai';
+}
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Detail Pengaduan</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -79,7 +87,7 @@ else
 </head>
 
 <body>
-
+    <!-- MODAL GAMBAR -->
     <div id="imageModal" class="modal">
         <span class="close-modal">&times;</span>
         <img class="modal-content" id="modalImg">
@@ -87,24 +95,37 @@ else
 
     <div class="konten">
         <h2 id="judul-h2">Detail Pengaduan</h2>
+        
+        <!-- ERROR MESSAGE -->
+        <?php if (isset($_SESSION['error'])): ?>
+            <div class="error">
+                <?= $_SESSION['error']; ?>
+            </div>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
 
         <div class="card-forum">
-
             <!-- HEADER -->
             <div class="card-header">
-                <div class="ticket"><?= $data['nomor_tiket'] ?></div>
+                <div class="ticket">
+                    <?= htmlspecialchars($data['nomor_tiket']) ?>
+                </div>
 
-                <?php if ($role == 'teknisi' || $role == 'manajer'): ?>
+                <?php if ($role == 'teknisi' || $role == 'manager'): ?>
                     <div>
-                        <?= $data['nama_penghuni'] ?> - Kamar <?= $data['kamar'] ?> - No.HP: <?= $data['hp_penghuni'] ?>
+                        <?= htmlspecialchars($data['nama_penghuni']) ?> - 
+                        Kamar <?= htmlspecialchars($data['kamar']) ?> - 
+                        No.HP: <?= htmlspecialchars($data['hp_penghuni']) ?>
                     </div>
                 <?php endif; ?>
 
-                <?php if ($role == 'penghuni' || $role == 'manajer'): ?>
+                <?php if ($role == 'penghuni' || $role == 'manager'): ?>
                     <div>
                         <?php if (!empty($data['nama_teknisi'])): ?>
-                            <strong>Ditangani oleh: </strong>
-                            <?= $data['nama_teknisi'] ?> - <?= $data['hp_teknisi'] ?>
+                            <strong>Ditangani oleh:</strong>
+                            <?= htmlspecialchars($data['nama_teknisi']) ?> -
+                            <?= htmlspecialchars($data['hp_teknisi']) ?>
+
                         <?php else: ?>
                             <i>Belum ditangani</i>
                         <?php endif; ?>
@@ -112,18 +133,19 @@ else
                 <?php endif; ?>
 
                 <div class="meta">
-                    <?= $data['created_at'] ?>
+                    <?= htmlspecialchars($data['created_at']) ?>
                 </div>
             </div>
 
             <!-- STATUS -->
             <span class="status <?= $status_class ?>">
-                <?= $data['status'] ?>
+                <?= htmlspecialchars($data['status']) ?>
             </span><br><br>
 
             <!-- KATEGORI -->
             <div>
-                <strong>Kategori:</strong> <?= $data['kategori'] ?>
+                <strong>Kategori:</strong>
+                <?= htmlspecialchars($data['kategori']) ?>
             </div><br>
 
             <!-- DESKRIPSI -->
@@ -153,10 +175,10 @@ else
 
             <!-- PENANGANAN DINI -->
             <?php if (!empty($data['penanganan_dini'])): ?>
-                <br>
-                <hr><br>
+                <br><hr><br>
                 <div class="komentar-box">
-                    <strong>Penanganan Dini:</strong><br><br>
+                    <strong>Penanganan Dini:</strong>
+                    <br><br>
                     <?= nl2br(htmlspecialchars($data['penanganan_dini'])) ?>
                 </div>
             <?php endif; ?>
@@ -165,21 +187,20 @@ else
             <?php if (!empty($data['komentar_penyelesaian'])): ?>
                 <br><br>
                 <div class="komentar-box">
-                    <strong>Komentar Penyelesaian:</strong><br><br>
+                    <strong>Komentar Penyelesaian:</strong>
+                    <br><br>
                     <?= nl2br(htmlspecialchars($data['komentar_penyelesaian'])) ?>
                 </div>
             <?php endif; ?>
 
-            <!-- AKSI TEKNISI -->
+            <!-- FORM AMBIL PENGADUAN -->
             <?php if ($role == 'teknisi' && $data['status'] == 'Menunggu'): ?>
                 <br><hr><br>
-                <form action="../teknisi/update_status.php" method="GET" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="<?= $data["id_pengaduan"] ?>">
+                <form action="../teknisi/update_status.php" method="GET">
+                    <input type="hidden" name="id" value="<?= $data['id_pengaduan'] ?>">
 
                     <label>Penanganan Dini:</label>
-                    <textarea name="dini"
-                        placeholder="Berikan penanganan dini agar penghuni tidak panik dan memperburuk keadaan"
-                        required></textarea><br><br>
+                    <textarea name="dini" placeholder="Berikan penanganan dini agar penghuni tidak panik dan memperburuk keadaan" required></textarea><br><br>
 
                     <button type="submit" name="aksi" value="ambil">
                         Tangani Pengaduan
@@ -187,6 +208,7 @@ else
                 </form>
             <?php endif; ?>
 
+            <!-- FORM SELESAIKAN PENGADUAN -->
             <?php if ($role == 'teknisi' && $data['status'] == 'Diproses' && $data['id_teknisi'] == $user_id): ?>
                 <br><br>
                 <form action="../teknisi/update_status.php" method="POST" enctype="multipart/form-data">
@@ -206,10 +228,7 @@ else
 
             <!-- BACK BUTTON -->
             <button onclick="history.back()">Kembali</button>
-
         </div>
     </div>
-
 </body>
-
 </html>
