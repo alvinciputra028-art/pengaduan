@@ -110,7 +110,6 @@ if (empty($status_labels)) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Beranda Manajer</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -118,7 +117,6 @@ if (empty($status_labels)) {
 </head>
 
 <body>
-
     <div class="konten">
         <h2 id="judul-h2">Dashboard Manajer</h2>
         <p>
@@ -188,9 +186,6 @@ if (empty($status_labels)) {
                 datasets: [{
                     label: 'Jumlah Pengaduan',
                     data: <?= json_encode($kategori_data) ?>,
-                    // backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    // borderColor: 'rgba(54, 162, 235, 1)',
-                    // borderWidth: 1
                 }]
             }
         });
@@ -201,11 +196,6 @@ if (empty($status_labels)) {
                 labels: <?= json_encode($status_labels) ?>,
                 datasets: [{
                     data: <?= json_encode($status_data) ?>,
-                    // backgroundColor: [ 
-                    //     'rgba(255, 99, 132, 0.6)',
-                    //     'rgba(255, 206, 86, 0.6)',
-                    //     'rgba(75, 192, 192, 0.6)'
-                    // ]
                 }]
             },
             options: {
@@ -214,7 +204,5 @@ if (empty($status_labels)) {
             }
         });
     </script>
-
 </body>
-
 </html>

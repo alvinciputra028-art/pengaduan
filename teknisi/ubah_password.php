@@ -35,7 +35,6 @@ if (isset($_POST['ubah_password'])) {
         // hash password baru
         $hash = password_hash($password_baru, PASSWORD_DEFAULT);
 
-        // update ke DB
         $stmt = mysqli_prepare($koneksi, "UPDATE teknisi SET password = ? WHERE id_teknisi = ?");
         mysqli_stmt_bind_param($stmt, "si", $hash, $id);
         mysqli_stmt_execute($stmt);
@@ -45,7 +44,6 @@ if (isset($_POST['ubah_password'])) {
         session_unset();
         session_destroy();
 
-        // redirect ke login
         header("Location: ../auth/login.php?msg=1");
         exit;
     }
@@ -54,7 +52,6 @@ if (isset($_POST['ubah_password'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Ubah Password</title>
 </head>
@@ -86,5 +83,4 @@ if (isset($_POST['ubah_password'])) {
         <a href="profil.php">Kembali ke Profil</a>
     </div>
 </body>
-
 </html>

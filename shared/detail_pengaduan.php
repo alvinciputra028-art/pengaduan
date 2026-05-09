@@ -196,7 +196,7 @@ if ($data['status'] == 'Menunggu') {
             <!-- FORM AMBIL PENGADUAN -->
             <?php if ($role == 'teknisi' && $data['status'] == 'Menunggu'): ?>
                 <br><hr><br>
-                <form action="../teknisi/update_status.php" method="GET">
+                <form action="../teknisi/update_status.php" method="POST">
                     <input type="hidden" name="id" value="<?= $data['id_pengaduan'] ?>">
 
                     <label>Penanganan Dini:</label>

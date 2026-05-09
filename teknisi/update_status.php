@@ -5,7 +5,7 @@ include '../config/koneksi.php';
 
 $id_teknisi = $_SESSION['id'];
 
-/* AMBIL PENGADUAN */
+/* Update pengaduan ketika peknisi ambil pengaduan*/
 if (isset($_POST['aksi']) && $_POST['aksi'] == 'ambil') {
     $id = $_POST['id'];
     $status = 'Diproses';
@@ -33,12 +33,11 @@ if (isset($_POST['aksi']) && $_POST['aksi'] == 'ambil') {
     exit;
 }
 
-/* SELESAIKAN & UPLOAD */
+/* Menyelesaikan pengaduan dan upload file */
 if (isset($_POST['aksi']) && $_POST['aksi'] == 'selesai') {
     $id = $_POST['id'];
     $komentar = $_POST['komentar'];
 
-    // upload bukti
     $allowed = ['jpg', 'jpeg', 'png'];
     $file = $_FILES['bukti_selesai'];
 
@@ -65,7 +64,6 @@ if (isset($_POST['aksi']) && $_POST['aksi'] == 'selesai') {
         exit;
     }
 
-    // update DB
     $status = 'Selesai';
 
     $stmt = mysqli_prepare($koneksi, "

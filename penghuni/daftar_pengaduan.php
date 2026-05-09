@@ -24,7 +24,6 @@ $query = mysqli_stmt_get_result($stmt);
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Forum Pengaduan</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -95,5 +94,4 @@ $query = mysqli_stmt_get_result($stmt);
         <?php endif; ?>
     </div>
 </body>
-
 </html>

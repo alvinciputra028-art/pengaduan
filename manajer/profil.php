@@ -17,7 +17,6 @@ $data = mysqli_fetch_assoc($result);
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Profil Saya</title>
 </head>
@@ -37,11 +36,9 @@ $data = mysqli_fetch_assoc($result);
         </div>
         <br>
 
-        <!-- UBAH PASSWORD -->
         <a href="ubah_password.php">
             <button class="password">Ubah Password</button>
         </a>
     </div>
 </body>
-
 </html>

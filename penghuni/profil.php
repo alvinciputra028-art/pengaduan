@@ -30,7 +30,6 @@ if (isset($_POST['update_hp'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Profil Saya</title>
 </head>
@@ -90,5 +89,4 @@ if (isset($_POST['update_hp'])) {
         </a>
     </div>
 </body>
-
 </html>

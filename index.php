@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// validasi tambahan
 if (isset($_SESSION['role'])) {
 
     if ($_SESSION['role'] === 'penghuni') {
@@ -16,7 +15,6 @@ if (isset($_SESSION['role'])) {
     }
 }
 
-// default ke login
 header("Location: auth/login.php");
 exit;
 ?>

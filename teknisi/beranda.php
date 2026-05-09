@@ -71,7 +71,6 @@ mysqli_stmt_close($stmt);
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Beranda Teknisi</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -93,7 +92,6 @@ mysqli_stmt_close($stmt);
         <h3>Panduan Singkat</h3>
 
         <div class="cards" id="panduan">
-
             <div class="card">
                 Gunakan menu <strong>Baru</strong> untuk menindaklanjuti pengaduan baru.
             </div>
@@ -109,18 +107,16 @@ mysqli_stmt_close($stmt);
             <div class="card">
                 Ubah nomor HP dan password di menu <strong>Profil</strong>.
             </div>
-        </div>
-        <br><hr><br>
+        </div><br><hr><br>
 
         <h3>Ringkasan Pengaduan</h3>
 
         <div class="cards">
-
             <div class="card">
                 <h4>Total Pengaduan</h4>
-                <p><strong>
-                        <?= $total ?>
-                    </strong></p>
+                <p>
+                    <strong><?= $total ?></strong>
+                </p>
             </div>
 
             <div class="card">
@@ -143,9 +139,8 @@ mysqli_stmt_close($stmt);
                         <?= $selesai ?>
                     </strong></p>
             </div>
-        </div>
-        <br><hr>
+        </div><br><hr>
+        
         <p>Selamat menggunakan sistem ini! Semoga penyelesaian kendala teknis di lapangan berjalan dengan lancar ya 🙌</p>
 </body>
-
 </html>

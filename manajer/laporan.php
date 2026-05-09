@@ -43,7 +43,7 @@ if ($filter_gedung != "") {
     $types .= "s";
 }
 
-$order_sql = "DESC"; // default
+$order_sql = "DESC";
 
 if ($filter_urutan == 'terlama') {
     $order_sql = "ASC";
@@ -75,7 +75,6 @@ $query = mysqli_stmt_get_result($stmt);
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Laporan Pengaduan</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -199,7 +198,5 @@ $query = mysqli_stmt_get_result($stmt);
         <?php endif; ?>
     </div>
     <script src="../assets/js/script.js"></script>
-
 </body>
-
 </html>

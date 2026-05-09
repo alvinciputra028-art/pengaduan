@@ -3,23 +3,19 @@ session_start();
 
 $error = "";
 
-// jika password berhasil diubah
 if (isset($_GET['msg']) && $_GET['msg'] == 1) {
     $error = "Password berhasil diubah. Silakan login kembali.";
 }
 
-// jika sudah login, arahkan ke index
 if (isset($_SESSION['role'])) {
     header("Location: ../index.php");
     exit;
 }
 
-// jika berhasil logout
 if (isset($_GET['logout'])) {
     $error = "Anda berhasil logout!";
 }
 
-// ambil pesan error dari URL
 if (isset($_GET['error'])) {
     if ($_GET['error'] == "1") {
         $error = "Password salah!";
@@ -33,7 +29,6 @@ if (isset($_GET['error'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Login Sistem Pengaduan</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -52,7 +47,6 @@ if (isset($_GET['error'])) {
 
 <body>
     <div class="container">
-        <!-- KIRI (LOGO) -->
         <div class="left">
             <h3>Sistem Pengaduan Kendala Rusunawa UNTAN</h3>
             <div class="logo-container">
@@ -60,7 +54,6 @@ if (isset($_GET['error'])) {
             </div>
         </div>
 
-        <!-- KANAN (FORM) -->
         <div class="right">
             <div class="mobile-logo">
                 <img src="../assets/img/logo_rusunawa_untan.jpg" alt="Logo">
@@ -88,5 +81,4 @@ if (isset($_GET['error'])) {
         </div>
     </div>
 </body>
-
 </html>

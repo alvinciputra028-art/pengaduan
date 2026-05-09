@@ -23,8 +23,7 @@ $query = mysqli_stmt_get_result($stmt);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <title>Pengaduan Diproses</title>
 </head>
@@ -89,5 +88,4 @@ $query = mysqli_stmt_get_result($stmt);
         <?php endif; ?>
     </div>
 </body>
-
 </html>

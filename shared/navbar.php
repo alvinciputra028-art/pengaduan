@@ -13,19 +13,16 @@ $page = $page ?? '';
 <script src="../assets/js/script.js"></script>
 
 <div class="navbar">
-    <!-- KIRI: LOGO + NAMA SISTEM -->
     <div class="nav-left">
         <img src="../assets/img/logo_rusunawa_untan.jpg">
         <span>Sistem Pengaduan Kendala Rusunawa UNTAN</span>
     </div>
 
-    <!-- TENGAH: MENU -->
     <div id="navMenu" class="nav-menu">
         <?php if ($role == 'penghuni'): ?>
             <a href="../penghuni/beranda.php" class="<?= ($page == 'beranda') ? 'active' : '' ?>">Beranda</a>
 
-            <a href="../penghuni/buat_pengaduan.php" class="<?= ($page == 'pengaduan') ? 'active' : '' ?>">
-                Adukan</a>
+            <a href="../penghuni/buat_pengaduan.php" class="<?= ($page == 'pengaduan') ? 'active' : '' ?>">Adukan</a>
 
             <a href="../penghuni/daftar_pengaduan.php" class="<?= ($page == 'daftar') ? 'active' : '' ?>">Daftar Pengaduan</a>
 
@@ -53,13 +50,10 @@ $page = $page ?? '';
 
         <?php endif; ?>
 
-        <!-- <a href="../auth/logout.php" class="logout-mobile" onclick="return confirmLogout(event)">Logout</a> -->
         <a href="../auth/logout.php" class="logout-mobile btn-logout">Logout</a>
     </div>
 
-    <!-- KANAN: LOGOUT -->
     <div class="nav-right">
-        <!-- <a href="../auth/logout.php" id="logout" class="logout-desktop" onclick="return confirmLogout(event)"> -->
         <a href="../auth/logout.php" id="logout" class="logout-desktop btn-logout">
             <span class="logout-text">Logout</span>
             <span class="logout-icon">🚪</span>
@@ -99,5 +93,4 @@ $page = $page ?? '';
             hamburger.classList.remove('active');
         });
     });
-
 </script>

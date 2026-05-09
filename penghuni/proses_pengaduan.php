@@ -23,7 +23,6 @@ if (!in_array($kategori, $allowed_kategori)) {
     exit;
 }
 
-
 // VALIDASI FILE
 if (!isset($_FILES['bukti_foto']) || $_FILES['bukti_foto']['error'] !== 0) {
     $_SESSION['error'] = "File wajib diupload";

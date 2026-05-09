@@ -20,7 +20,6 @@ $query = mysqli_stmt_get_result($stmt);
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Riwayat Pengaduan</title>
 </head>
@@ -79,7 +78,5 @@ $query = mysqli_stmt_get_result($stmt);
             <p>Anda belum pernah melakukan pengaduan.</p>
         <?php endif; ?>
     </div>
-
 </body>
-
 </html>

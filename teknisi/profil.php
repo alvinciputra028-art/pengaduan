@@ -22,7 +22,6 @@ if (isset($_POST['update_hp'])) {
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
-    // refresh halaman biar data update
     header("Location: profil.php?success=1");
     exit;
 }
@@ -30,7 +29,6 @@ if (isset($_POST['update_hp'])) {
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Profil Saya</title>
 </head>
@@ -41,20 +39,17 @@ if (isset($_POST['update_hp'])) {
         <p><strong>Nama:</strong></p>
         <div class="info">
             <p><?= $data['nama_teknisi'] ?></p>
-        </div>
-        <br>
+        </div><br>
 
         <p><strong>Username:</strong></p>
         <div class="info">
             <p><?= $data['username'] ?></p>
-        </div>
-        <br>
+        </div><br>
 
         <p><strong>Departemen Gedung:</strong></p>
         <div class="info">
             <p><?= $data['departemen_gedung'] ?></p>
-        </div>
-        <br>
+        </div><br>
 
         <p><strong>Nomor Handphone:</strong></p>
         <div class="info">
@@ -75,8 +70,7 @@ if (isset($_POST['update_hp'])) {
             <input type="text" name="nomor_hp" value="<?= $data['nomor_hp'] ?>" required>
             <br><br>
             <button type="submit" name="update_hp">Simpan</button>
-        </form>
-        <br>
+        </form><br>
 
         <!-- UBAH PASSWORD -->
         <a href="ubah_password.php">
@@ -84,5 +78,4 @@ if (isset($_POST['update_hp'])) {
         </a>
     </div>
 </body>
-
 </html>

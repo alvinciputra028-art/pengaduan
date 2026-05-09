@@ -7,8 +7,7 @@ include '../shared/navbar.php';
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <title>Beranda</title>
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -30,7 +29,6 @@ include '../shared/navbar.php';
         <h3>Panduan Singkat</h3>
 
         <div class="cards" id="panduan">
-
             <div class="card">
                 Gunakan menu <strong>Pengaduan</strong> untuk melaporkan kendala.
             </div>
@@ -46,10 +44,7 @@ include '../shared/navbar.php';
             <div class="card">
                 Ubah nomor HP dan password di menu <strong>Profil</strong>.
             </div>
-
-        </div>
-
-        <br><hr>
+        </div><br><hr>
 
         <p>Selamat menggunakan sistem ini! Semoga kendala Anda segera ditangani oleh teknisi kami 🙌</p>
     </div>
