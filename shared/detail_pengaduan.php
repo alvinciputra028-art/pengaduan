@@ -119,20 +119,22 @@ if ($data['status'] == 'Menunggu') {
                     </div>
                 <?php endif; ?>
 
-                <?php if ($role == 'penghuni' || $role == 'manager'): ?>
+                <?php if ($role == 'penghuni' || $role == 'manajer'): ?>
                     <div>
                         <?php if (!empty($data['nama_teknisi'])): ?>
-                            <strong>Ditangani oleh:</strong>
+                            <strong>Ditangani oleh: </strong>
                             <?= htmlspecialchars($data['nama_teknisi']) ?> -
-                            <?= htmlspecialchars($data['hp_teknisi']) ?>
-
+                            <?= htmlspecialchars($data['hp_teknisi']) ?><br>
+                            <strong>Selesai pada: </strong>
+                            <?= htmlspecialchars($data['updated_at']) ?>
                         <?php else: ?>
                             <i>Belum ditangani</i>
                         <?php endif; ?>
-                    </div>
+                    </div><br>
                 <?php endif; ?>
 
                 <div class="meta">
+                    <strong>Diadukan pada: </strong>
                     <?= htmlspecialchars($data['created_at']) ?>
                 </div>
             </div>

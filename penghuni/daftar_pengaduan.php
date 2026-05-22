@@ -55,6 +55,7 @@ $query = mysqli_stmt_get_result($stmt);
                         </div>
 
                         <div class="meta">
+                            <strong>Diadukan pada: </strong>
                             <?= $row['created_at'] ?>
                         </div>
                     </div>
